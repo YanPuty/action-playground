@@ -39,6 +39,10 @@ jobs:
           touch .env
           echo "${{ secrets.ENV_FILE }}" > .env.ENV_FILE
           cat .env
+    
+    - name: 'Create env file'
+      run: |
+          ls -la
 
   docker-bulild-images:
     # The type of runner that the job will run on
@@ -51,6 +55,12 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
+        
+      - name: 'Create env file'
+        run: |
+            touch .env
+            echo "${{ secrets.ENV_FILE }}" > .env.ENV_FILE
+            cat .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
