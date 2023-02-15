@@ -12,11 +12,12 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  ENV_FILE: ${{ secrets.ENV }}
+  ENV_FILE: ${{ secrets.ENV_FILE }}
 
 jobs:
   node-build:
     runs-on: ubuntu-latest
+    environment: Development
 
     strategy:
       matrix:
