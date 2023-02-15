@@ -16,17 +16,6 @@ env:
 
 jobs:
 
-  create-env:
-    environment: Development
-    runs-on: ubuntu-latest 
-    steps:
-      - name: Make .env File
-        ## Reference your environment variables
-        run: |
-            touch .env
-            echo "${{ env.ENV_FILE }}" > .env
-            cat .env  
-  
   node-build:
     runs-on: ubuntu-latest
     environment: Development
@@ -44,41 +33,46 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
+
     - run: npm ci
     - run: npm install
-    
+
     - name: 'Create env file'
       run: |
           touch .env
           echo "${{ env.ENV_FILE }}" > .env
           cat .env
-    
+
     - name: 'List directory contents'
       run: ls -la
 
   docker-bulild-images:
     # The type of runner that the job will run on
-    needs: [node-build, create-env]
+    needs: [node-build]
 
     runs-on: ubuntu-latest
-    # build docker image and push to docker hub
-    # only if the app build and test successfully
     environment: Development
-    
+
     steps:
     - name: checkout repo
       uses: actions/checkout@v2
-      
+
+    - name: 'Create env file'
+      run: |
+          touch .env
+          echo "${{ env.ENV_FILE }}" > .env
+          cat .env
+
     - name: 'List directory contents'
       run: ls -la
-          
+
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
         username: ${{env.DOCKERHUB_USERNAME}}
         password: ${{env.DOCKERHUB_TOKEN}}
 
+    # build docker image and push to docker hub
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
