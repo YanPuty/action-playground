@@ -19,7 +19,6 @@ jobs:
   node-build:
     runs-on: ubuntu-latest
     environment: Development
-    needs: [create-env]
 
     strategy:
       matrix:
