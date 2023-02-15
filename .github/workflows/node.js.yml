@@ -40,9 +40,8 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env.ENV_FILE
           cat .env
     
-    - name: 'Create env file'
-      run: |
-          ls -la
+    - name: 'List directory contents'
+      run: ls -la
 
   docker-bulild-images:
     # The type of runner that the job will run on
