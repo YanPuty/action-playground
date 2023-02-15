@@ -10,6 +10,7 @@ on:
     branches: [ "master" ]
 
 env:
+  Environment: Development
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -17,7 +18,7 @@ env:
 jobs:
   node-build:
     runs-on: ubuntu-latest
-    environment: Development
+    environment: ${{env.Environment}}
 
     strategy:
       matrix:
@@ -38,7 +39,7 @@ jobs:
     - name: 'Create env file'
       run: |
           touch .env
-          echo "${{ secrets.ENV_FILE }}" > .env.ENV_FILE
+          echo "${{ env.ENV_FILE }}" > .env
           cat .env
     
     - name: 'List directory contents'
@@ -51,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     # build docker image and push to docker hub
     # only if the app build and test successfully
-    environment: Development
+    environment: ${{env.Environment}}
 
     steps:
       - name: checkout repo
