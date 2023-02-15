@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  app:
+    image: dexterputy/node-app:latest
+    build:
+      context: ./
+    volumes:
+      - .:/app
+    command: npm run start
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: PRODUCTION
