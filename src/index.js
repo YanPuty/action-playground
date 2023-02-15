@@ -17,7 +17,6 @@ app.get('/api-secret', (req, res) => {
 });
 
 app.listen(port, () => {
-  if (!process.env.API_SECRET) throw Error('API_SECRET does not existed');
-
+  console.log('>>ENV>>', process.env);
   console.log(`Example app listening on port ${port}`);
 });
