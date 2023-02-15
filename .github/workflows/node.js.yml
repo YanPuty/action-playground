@@ -51,6 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     # build docker image and push to docker hub
     # only if the app build and test successfully
+    environment: Development
 
     steps:
       - name: checkout repo
