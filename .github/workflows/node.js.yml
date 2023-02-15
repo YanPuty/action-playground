@@ -12,9 +12,9 @@ on:
 env:
   PORT: ${{ vars.PORT }}
   NODE_ENV: ${{ secrets.NODE_ENV }}
-  DEBUG: ${{ env.DEBUG }}
-  API_KEY: ${{ env.API_KEY }}
-  SECRET_KEY: ${{ env.SECRET_KEY }}
+  DEBUG: ${{ secrets.DEBUG }}
+  API_KEY: ${{ secrets.API_KEY }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
 
@@ -32,7 +32,7 @@ jobs:
         file_name: .env
         fail_on_empty: false
         
-    - name: 'Create env file'
+    - name: 'ENV FILE'
       run:
         cat .env
         
