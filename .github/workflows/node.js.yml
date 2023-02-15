@@ -10,7 +10,6 @@ on:
     branches: [ "master" ]
 
 env:
-  Environment: Development
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -18,7 +17,7 @@ env:
 jobs:
   node-build:
     runs-on: ubuntu-latest
-    environment: ${{env.Environment}}
+    environment: Development
 
     strategy:
       matrix:
@@ -52,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     # build docker image and push to docker hub
     # only if the app build and test successfully
-    environment: ${{env.Environment}}
+    environment: Development
 
     steps:
       - name: checkout repo
