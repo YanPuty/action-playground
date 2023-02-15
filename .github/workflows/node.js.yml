@@ -54,6 +54,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm install
+    - run: npm run start
   
   docker-bulild-images:
     # The type of runner that the job will run on
