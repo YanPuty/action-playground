@@ -67,6 +67,9 @@ jobs:
     environment: Development
     
     steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+      
     - name: 'List directory contents'
       run: ls -la
           
